@@ -9,20 +9,6 @@ MEALS = (
 )
 
 
-class Dog(models.Model):
-    name = models.CharField(max_length=100)
-    breed = models.CharField(max_length=100)
-    description = models.TextField(max_length=250)
-    age = models.IntegerField()
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse('dog_detail', kwargs={'dog_id': self.id})
-
-
-
 
 class Toy(models.Model):
     name = models.CharField(max_length=50)
@@ -33,6 +19,21 @@ class Toy(models.Model):
 
     def get_absolute_url(self):
         return reverse('toy_detail', kwargs={'toy_id': self.id})
+
+
+class Dog(models.Model):
+    name = models.CharField(max_length=100)
+    breed = models.CharField(max_length=100)
+    description = models.TextField(max_length=250)
+    age = models.IntegerField()
+    toys = models.ManyToManyField(Toy)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('dog_detail', kwargs={'dog_id': self.id})
+
 
 
 
